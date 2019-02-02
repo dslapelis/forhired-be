@@ -18,6 +18,6 @@ from django.urls import path, include
 from api import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.TestView.as_view()),
     path('auth/', include('authentication.urls'))
 ]

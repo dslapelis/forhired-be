@@ -29,13 +29,21 @@ def register_candidate(request):
     return HttpResponse(json.dumps({'success': 'true'}))
 
 
+@csrf_exempt
+@require_http_methods(["POST"])
 def register_company(request):
-    body = json.loads((request.body).decode('utf-8'))
-    print(body)
+    try:
+        body = json.loads((request.body).decode('utf-8'))
+    except:
+        HttpResponseBadRequest(json.dumps(
+            {'success': 'false', 'msg': 'Request format error'}))
 
     user = User.objects.create_user(
         body['email'], body['email'], body['password'], first_name=body['first'], last_name=body['last'])
-    user.save()
+    try:
+        user.save()
+    except IntegrityError:
+        return HttpResponseBadRequest(json.dumps({'success': 'false', 'msg': 'User with this email already exists.'}))
 
     company = Company(user=user)
     company.save()
