@@ -18,6 +18,7 @@ from django.urls import path, include
 from api import views
 
 urlpatterns = [
-    path('', views.TestView.as_view()),
+    path('job/', views.JobView.as_view()),
+    path('company/', views.CompanyView.as_view()),
     path('auth/', include('authentication.urls'))
 ]
