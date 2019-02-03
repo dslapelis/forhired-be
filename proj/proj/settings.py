@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
-    'authentication'
+    'authentication',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -157,4 +158,15 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+try:
+    from proj.local_settings import *
+except ImportError:
+    pass
+
+AWS_S3_ACCESS_KEY_ID = AWS_S3_ACCESS_KEY_ID
+AWS_S3_SECRET_ACCESS_KEY = AWS_S3_SECRET_ACCESS_KEY
+AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = AWS_S3_CUSTOM_DOMAIN
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
