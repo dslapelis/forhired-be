@@ -13,7 +13,10 @@ class JobView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        return JsonResponse(list(Job.objects.all().values()), safe=False)
+        try:
+            return JsonResponse(list(Job.objects.all().values()), safe=False)
+        except:
+            return HttpResponseServerError("Something went wrong.")
 
     def post(self, request):
         user = User.objects.get(username=request.user)
