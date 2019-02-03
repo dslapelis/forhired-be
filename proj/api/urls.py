@@ -20,5 +20,6 @@ from api import views
 urlpatterns = [
     path('job/', views.JobView.as_view()),
     path('company/', views.CompanyView.as_view()),
+    path('resume/', views.ResumeView.as_view()),
     path('auth/', include('authentication.urls'))
 ]
