@@ -15,7 +15,7 @@ mccabe==0.6.1
 mock==2.0.0
 pbr==5.1.2
 pycodestyle==2.5.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.2.2
 python-dateutil==2.7.5
 pytz==2018.9
